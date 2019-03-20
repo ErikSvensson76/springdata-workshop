@@ -67,8 +67,30 @@ public class Order {
 		return "Order [id=" + id + ", creationDateTime=" + creationDateTime + "]";
 	}
 	
+	public boolean addOrderItem(OrderItem item) {
+		if(item.getOrder() != null) {
+			throw new IllegalArgumentException();
+		}
+		
+		item.setOrder(this);		
+		return content.add(item);
+				
+	}
 	
+	public boolean removeOrderItem(OrderItem item) {
+		if(!content.contains(item)) {
+			throw new IllegalArgumentException();
+		}
+		
+		item.setOrder(null);
+		return content.remove(item);
+	}
 	
+	public double getPriceTotal() {
+		return content.stream()
+				.mapToDouble(OrderItem::getPrice)
+				.sum();
+	}
 	
 
 }

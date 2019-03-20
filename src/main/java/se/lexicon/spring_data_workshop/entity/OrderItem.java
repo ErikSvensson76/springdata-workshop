@@ -7,10 +7,9 @@ public class OrderItem implements Comparable<OrderItem>{
 	private Product product;
 	private Order order;
 	
-	public OrderItem(int quantity, Product product, Order order) {
+	public OrderItem(int quantity, Product product) {
 		this.quantity = quantity;
-		this.product = product;
-		this.order = order;
+		this.product = product;		
 	}
 	
 	public OrderItem() {}

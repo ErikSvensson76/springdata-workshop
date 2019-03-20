@@ -6,6 +6,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -22,7 +23,8 @@ public class OrderItem implements Comparable<OrderItem>{
 	
 	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH},
 			fetch = FetchType.LAZY)
-	private Order order;
+	@JoinColumn(name = "ORDER_ID")
+	private ProductOrder theOrder;
 	
 	public OrderItem(int quantity, Product product) {
 		this.quantity = quantity;
@@ -47,12 +49,12 @@ public class OrderItem implements Comparable<OrderItem>{
 		this.product = product;
 	}
 
-	public Order getOrder() {
-		return order;
+	public ProductOrder getOrder() {
+		return theOrder;
 	}
 
-	public void setOrder(Order order) {
-		this.order = order;
+	public void setOrder(ProductOrder order) {
+		this.theOrder = order;
 	}
 
 	public int getId() {
@@ -86,7 +88,7 @@ public class OrderItem implements Comparable<OrderItem>{
 
 	@Override
 	public String toString() {
-		return "OrderItem [id=" + id + ", quantity=" + quantity + ", product=" + product + ", order=" + order + "]";
+		return "OrderItem [id=" + id + ", quantity=" + quantity + ", product=" + product + ", order=" + theOrder + "]";
 	}
 	
 	public double getPrice() {

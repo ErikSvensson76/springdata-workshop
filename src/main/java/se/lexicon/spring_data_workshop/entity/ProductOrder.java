@@ -1,6 +1,8 @@
 package se.lexicon.spring_data_workshop.entity;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -13,22 +15,26 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Order {
+public class ProductOrder {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH},
-			mappedBy = "order", fetch = FetchType.EAGER)
+	@OneToMany(
+			cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH},
+			fetch = FetchType.EAGER, 
+			mappedBy = "theOrder", 
+			orphanRemoval = true
+		)
 	private Set<OrderItem> content = new TreeSet<>();
-	private final LocalDateTime creationDateTime;
+	private LocalDateTime creationDateTime;
 	
-	public Order(LocalDateTime creationDateTime) {		
+	public ProductOrder(LocalDateTime creationDateTime) {		
 		this.creationDateTime = creationDateTime;
 	}
 	
-	public Order() {
+	public ProductOrder() {
 		creationDateTime = LocalDateTime.now();
 	}
 
@@ -65,7 +71,7 @@ public class Order {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Order other = (Order) obj;
+		ProductOrder other = (ProductOrder) obj;
 		if (creationDateTime == null) {
 			if (other.creationDateTime != null)
 				return false;
@@ -78,7 +84,7 @@ public class Order {
 
 	@Override
 	public String toString() {
-		return "Order [id=" + id + ", creationDateTime=" + creationDateTime + "]";
+		return "ProductOrder [id=" + id + ", creationDateTime=" + creationDateTime + "]";
 	}
 	
 	public boolean addOrderItem(OrderItem item) {

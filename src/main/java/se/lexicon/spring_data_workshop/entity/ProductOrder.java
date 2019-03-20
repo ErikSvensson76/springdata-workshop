@@ -28,7 +28,7 @@ public class ProductOrder {
 			orphanRemoval = true
 		)
 	private Set<OrderItem> content = new TreeSet<>();
-	private LocalDateTime creationDateTime;
+	private final LocalDateTime creationDateTime;
 	
 	public ProductOrder(LocalDateTime creationDateTime) {		
 		this.creationDateTime = creationDateTime;

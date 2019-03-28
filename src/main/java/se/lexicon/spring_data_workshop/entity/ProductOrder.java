@@ -1,8 +1,6 @@
 package se.lexicon.spring_data_workshop.entity;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 

@@ -1,0 +1,60 @@
+/* -------------------------------------------*/
+/* FORM */
+/* -------------------------------------------*/
+
+.generic-form{
+    width: 60%;
+    margin: 0 auto;
+    background-color: rgb(183, 243, 198);
+    padding: 1%;
+    border-radius: 10px
+        
+}
+
+input[type=text],
+input[type=email],
+select,
+textarea{
+    width: 100%;
+    padding: 7px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+textarea{
+    height: 100px;
+}
+
+input[type=checkbox]{
+    margin: 10px 5px 10px 0;
+}
+
+input[type=submit] {
+    display: inline-block;
+    padding: 10px 30px;
+    font-weight: 300;
+    text-decoration: none;
+    border-radius: 200px;
+    color: #fff;
+    transition: background-color 0.2s, border 0.2s;
+}
+
+input[type=submit] {
+    background-color: #6ab04c;
+    border: 1px solid #6ab04c;
+    margin-right: 15px;
+}
+
+
+input[type=submit]:hover,
+input[type=submit]:active{
+    background-color: #4d8138;
+    border: 1px solid #4d8138;
+}
+
+*:focus{
+   outline: none; 
+}
+
+
+

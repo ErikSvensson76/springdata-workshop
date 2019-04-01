@@ -1,7 +1,10 @@
 package se.lexicon.spring_data_workshop.repository_tests;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,8 +21,6 @@ import se.lexicon.spring_data_workshop.entity.Product;
 import se.lexicon.spring_data_workshop.entity.ProductOrder;
 import se.lexicon.spring_data_workshop.repository.OrderItemRepo;
 import se.lexicon.spring_data_workshop.repository.ProductOrderRepo;
-
-import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest

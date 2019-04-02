@@ -9,6 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class OrderItem implements Comparable<OrderItem>{
 	
@@ -49,6 +53,7 @@ public class OrderItem implements Comparable<OrderItem>{
 		this.product = product;
 	}
 
+	@JsonBackReference
 	public ProductOrder getOrder() {
 		return theOrder;
 	}

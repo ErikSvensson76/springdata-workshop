@@ -1,5 +1,6 @@
 package se.lexicon.spring_data_workshop.entity;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.TreeSet;
@@ -12,8 +13,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
-public class ProductOrder {
+public class ProductOrder{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +28,7 @@ public class ProductOrder {
 			fetch = FetchType.EAGER, 
 			mappedBy = "theOrder", 
 			orphanRemoval = true
-		)
+		)	
 	private Set<OrderItem> content = new TreeSet<>();
 	private final LocalDateTime creationDateTime;
 	
@@ -36,6 +40,7 @@ public class ProductOrder {
 		creationDateTime = LocalDateTime.now();
 	}
 
+	@JsonManagedReference
 	public Set<OrderItem> getContent() {
 		return content;
 	}

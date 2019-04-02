@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html >
+<html xmlns:th = "www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/> 
           
-    <link rel="stylesheet" type="text/css"  href="../static/css/normalize.css"/>
-    <link rel="stylesheet" type="text/css"  href="../static/css/grid.css"/>
-    <link rel="stylesheet" type="text/css"  href="../static/css/register.css"/>
-    <link rel="stylesheet" type="text/css"  href="../static/css/form_style.css"/>
+    <link rel="stylesheet" type="text/css"  th:href = "@{/css/normalize.css}"  href="../static/css/normalize.css"/>
+    <link rel="stylesheet" type="text/css"  th:href = "@{/css/grid.css}" href="../static/css/grid.css"/>
+    <link rel="stylesheet" type="text/css"  th:href = "@{/css/register.css}" href="../static/css/register.css"/>
+    <link rel="stylesheet" type="text/css"  th:href = "@{/css/form_style.css}" href="../static/css/form_style.css"/>
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,300i,400" rel="stylesheet"/>
     
     <title>Registrera</title>
@@ -20,14 +20,14 @@
             <h2>Skapa</h2>
         </div>
         <div class="row">
-            <form method="POST" action="#" class="generic-form">                    
+            <form method="POST" action="#" th:action = "@{create}" th:object = "${product}" class="generic-form">                    
             
                 <div class ="row">
                     <div class="col span-1-of-3">
                         <label for="name">Product name</label>
                     </div>
                     <div class="col span-2-of-3">
-                        <input type="text" name="name" id="name" placeholder="Produkt namn" required/>
+                        <input type="text" name="name" id="name" placeholder="Produkt namn" th:field = "*{name}" required/>
                     </div>
                    
                 </div>
@@ -36,7 +36,7 @@
                         <label for="price">Pris</label>
                     </div>
                     <div class="col span-2-of-3">
-                        <input type="number" name="price" id="price" required/>
+                        <input type="number" name="price" id="price" th:field = "*{price}" required/>
                     </div>
                     
                 </div>                

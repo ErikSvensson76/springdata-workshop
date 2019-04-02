@@ -20,6 +20,7 @@ public class TestCommandLine implements CommandLineRunner{
 	private ProductRepo repo;
 	private ProductOrderRepo orderRepo;	
 
+	@Autowired
 	public TestCommandLine(ProductRepo repo, ProductOrderRepo orderRepo) {
 		this.repo = repo;
 		this.orderRepo = orderRepo;

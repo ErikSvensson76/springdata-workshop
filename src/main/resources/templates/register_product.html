@@ -31,6 +31,16 @@
                     </div>
                    
                 </div>
+                <div class="row form-error" th:if="${#fields.hasErrors('name')}">
+                	<div class="col span-1-of-3">
+                		<label>&nbsp;</label>
+                	</div>
+                	<div class="col span-2-of-3">
+                		<ul>
+                			<li class="error-item" th:each="err: ${#fields.errors('name')}" th:text="${err}" />  			
+           				</ul>                		
+                	</div>
+                </div>
                 <div class ="row">
                     <div class="col span-1-of-3">
                         <label for="price">Pris</label>
@@ -39,6 +49,16 @@
                         <input type="number" name="price" id="price" th:field = "*{price}" required/>
                     </div>
                     
+                </div>
+                <div class="row form-error" th:if="${#fields.hasErrors('price')}">
+                	<div class="col span-1-of-3">
+                		<label>&nbsp;</label>
+                	</div>
+                	<div class="col span-2-of-3">
+                		<ul>
+                			<li class="error-item" th:each="err: ${#fields.errors('price')}" th:text="${err}" />  			
+           				</ul>                		
+                	</div>
                 </div>                
                 <div class ="row">
                     <div class="col span-1-of-3">

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th = "www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet"  th:href="@{/css/normalize.css}" href="../static/css/normalize.css"/>
+    <link rel="stylesheet"  th:href="@{/css/grid.css}" href="../static/css/grid.css"/>
+    <link rel="stylesheet"  th:href="@{/css/default-style.css}" href="../static/css/default-style.css"/>
+</head>
+
+<body>
+        <div class = "list-section">
+        
+         <div class="row">
+       		<p class="col span-1-of-3">Produkt</p>
+       		<p class="col span-2-of-3">Pris</p>       				       
+        </div>
+        <ul th:each = "product: ${products}">
+        	
+        	<li class="row">
+        		<a href="#" th:href="@{'/product/' + ${product.id}}" class="link-row">
+        			<span class="col span-1-of-3" th:text = "${product.name}">Apple</span>
+        			<span class="col span-2-of-3" th:text = "${product.price}">13</span>        			
+        		</a>
+        	</li>	        	
+        </ul>  
+       </div>
+
+</body>
+
+</html>

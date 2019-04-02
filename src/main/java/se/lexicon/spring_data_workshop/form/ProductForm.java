@@ -1,8 +1,14 @@
 package se.lexicon.spring_data_workshop.form;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
+
 public class ProductForm {
 	
+	@Size(min = 2, max = 50, message = "Must have between 2 and 50 characters")
 	private String name;
+	
+	@Min(value = 1, message = "Price need to be bigger than 1")
 	private double price;
 	
 	public String getName() {

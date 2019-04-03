@@ -12,7 +12,7 @@ public interface ProductService {
 
 	List<Product> findByName(String name);
 
-	boolean removeProduct(int id);
+	boolean removeProduct(int id) throws Exception;
 
 	Product save(Product product);
 

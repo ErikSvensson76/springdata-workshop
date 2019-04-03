@@ -36,7 +36,7 @@ public class ProductServiceImpl implements ProductService {
 		return productRepo.findByNameIgnoreCase(name);
 	}
 	
-	public boolean removeProduct(int id) {
+	public boolean removeProduct(int id) throws Exception{
 		productRepo.deleteById(id);		
 		return productRepo.existsById(id);
 	}

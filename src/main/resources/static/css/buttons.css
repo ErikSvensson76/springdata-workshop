@@ -1,0 +1,49 @@
+.btn-update{
+	background-color: #6ab04c;
+    border: 1px solid #6ab04c;
+    border-radius: 5px;  
+    margin: auto;
+    color: #fff;
+    text-decoration: none;
+    align: right;
+    font-size: 70%;
+    padding: 5px;   
+}
+
+.btn-delete{
+	background-color: #ff595e;
+	border: 1px solid #ff595e;
+	border-radius: 5px;
+	margin-right: auto;
+	color: #fff;
+	text-decoration: none;
+	align: right;
+	font-size: 70%;
+	padding: 5px;
+}
+
+.btn-update:link,
+.btn-update:visited {
+	
+    background-color: #6ab04c;
+    border: 1px solid #6ab04c;    
+}
+
+.btn-update:hover,
+.btn-update:active {
+	background-color: #4d8138;
+    border: 1px solid #4d8138;
+    
+}
+
+.btn-delete:link,
+.btn-delete:visited{
+	background-color: #ff595e;
+	border: 1px solid #ff595e;	
+}
+
+.btn-delete:hover,
+.btn-delete:active{
+	background-color: #f90006;
+	border: 1px solid #f90006;	
+}

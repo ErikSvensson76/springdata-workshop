@@ -7,6 +7,7 @@
     <link rel="stylesheet"  th:href = "@{/css/normalize.css}" href="../static/css/normalize.css"/>
     <link rel="stylesheet"  th:href= "@{/css/grid.css}" href="../static/css/grid.css"/>
     <link rel="stylesheet"  th:href= "@{/css/default-style.css}" href="../static/css/default-style.css"/>
+    <link rel="stylesheet"  th:href= "@{/css/buttons.css}" href="../static/css/buttons.css"/>
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,300i,400" rel="stylesheet"/>
 
    
@@ -24,7 +25,18 @@
         <div class = "row">
             <p class="col span-1-of-3 field">Price</p>
             <p class="col span-2-of-3 value" th:text= "${product.price}">499</p>
-        </div>            
+        </div> 
+        <div class = "row">
+        	<div class="col span-8-of-10">&nbsp;</div>
+        	<div class="col span-1-of-10">
+        		<a class="btn-update" href="#" th:href="@{'/product/' + ${product.id} + '/update'}">Update</a>
+        	</div>
+        	<div class="col span-1-of-10">
+	        	<form th:action = "@{'/product/'+ ${product.id} + '/delete'}" th:method="DELETE">
+	        		<input type="submit" class="btn-delete" value="Dont click"/>
+	        	</form>        		       		
+        	</div>       		        	      	
+        </div>           
     </div>
     
 </body>

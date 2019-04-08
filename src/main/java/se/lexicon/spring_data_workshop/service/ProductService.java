@@ -16,4 +16,6 @@ public interface ProductService {
 
 	Product save(Product product);
 
+	Product update(int productId, Product updated) throws IllegalArgumentException;
+
 }

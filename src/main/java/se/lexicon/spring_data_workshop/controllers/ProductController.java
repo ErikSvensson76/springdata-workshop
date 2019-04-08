@@ -52,17 +52,12 @@ public class ProductController {
 		if(updated == null) {
 			return ResponseEntity.badRequest().build();
 		}
-		Product original = null;
+		
 		try {
-			original = service.findById(id);
+			return ResponseEntity.ok(service.update(id, updated));
 		}catch(IllegalArgumentException e) {
 			return ResponseEntity.notFound().build();
-		}
-		
-		original.setName(updated.getName());
-		original.setPrice(updated.getPrice());
-		
-		return ResponseEntity.ok().body(service.save(original));		
+		}		
 	}
 	
 	@GetMapping("/product/{id}")

@@ -44,4 +44,19 @@ public class ProductServiceImpl implements ProductService {
 	public Product save(Product product) {
 		return productRepo.save(product);
 	}
+	
+	/**
+	 * 
+	 * @param productId 
+	 * @param updated
+	 * @return Product original updated 
+	 * @throws IllegalArgumentException when original product could not be found with int productId
+	 */
+	@Override
+	public Product update(int productId, Product updated) throws IllegalArgumentException{
+		Product original = findById(productId);		
+		original.setName(updated.getName());
+		original.setPrice(updated.getPrice());
+		return productRepo.save(original);
+	}
 }

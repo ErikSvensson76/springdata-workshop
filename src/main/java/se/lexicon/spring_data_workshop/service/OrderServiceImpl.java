@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import se.lexicon.spring_data_workshop.entity.OrderItem;
 import se.lexicon.spring_data_workshop.entity.Product;
 import se.lexicon.spring_data_workshop.entity.ProductOrder;
+import se.lexicon.spring_data_workshop.exception.EntityNotFoundException;
 import se.lexicon.spring_data_workshop.repository.ProductOrderRepo;
 
 @Service
@@ -26,7 +27,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	public ProductOrder findOrderById(int id) {
-		return orderRepo.findById(id).orElseThrow(IllegalArgumentException::new);
+		return orderRepo.findById(id).orElseThrow(() -> new EntityNotFoundException("Could not find ProductOrder with id " + id));
 	}
 	
 	public List<ProductOrder> findAll() {

@@ -10,6 +10,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -27,6 +29,10 @@ public class ProductOrder {
 		)
 	private Set<OrderItem> content = new TreeSet<>();
 	private final LocalDateTime creationDateTime;
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH},
+			fetch = FetchType.LAZY)
+	@JoinColumn(name = "CUSTOMER_ID")
+	private AppUser customer;
 	
 	public ProductOrder(LocalDateTime creationDateTime) {		
 		this.creationDateTime = creationDateTime;
@@ -50,6 +56,14 @@ public class ProductOrder {
 
 	public LocalDateTime getCreationDateTime() {
 		return creationDateTime;
+	}	
+
+	public AppUser getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(AppUser customer) {
+		this.customer = customer;
 	}
 
 	@Override

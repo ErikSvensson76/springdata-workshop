@@ -16,6 +16,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import se.lexicon.spring_data_workshop.entity.AppUser;
 import se.lexicon.spring_data_workshop.entity.OrderItem;
 import se.lexicon.spring_data_workshop.entity.Product;
 import se.lexicon.spring_data_workshop.entity.ProductOrder;
@@ -35,9 +36,15 @@ public class ProductOrderRepoTest {
 	private OrderItem orderItemToRemove;
 	private ProductOrder order1;
 	private ProductOrder order2;
+	private String user1Id;
+	
 	
 	@Before
 	public void init() {
+		//Create some AppUsers
+		AppUser user1 = new AppUser("test", "testsson","test@test.com");
+		AppUser user2 = new AppUser("test2", "testsson2", "test2@test.com");
+		
 		//Create some Products
 		Product spam = new Product("Spam", 10.90);
 		Product computer = new Product("Computer", 5990);	
@@ -53,17 +60,20 @@ public class ProductOrderRepoTest {
 		ProductOrder order1 = new ProductOrder(LocalDateTime.of(2018, 9, 11, 13, 43));
 		order1.addOrderItem(orderItem);
 		order1.addOrderItem(orderItem2);
+		order1.setCustomer(user2);
 		
 		ProductOrder order2 = new ProductOrder(LocalDateTime.of(2019, 3, 15, 18, 33));
 		order2.addOrderItem(orderItem3);
 		order2.addOrderItem(orderItem4);
+		order2.setCustomer(user1);
 		
 		//Save ProductOrders
 		this.order1 = testRepo.save(order1);
 		this.order1Id = this.order1.getId();
 		
 		this.order2 = testRepo.save(order2);
-		this.order2Id = this.order2.getId();		
+		this.order2Id = this.order2.getId();
+		this.user1Id = this.order2.getCustomer().getId();
 	}
 	
 	@Test
@@ -99,5 +109,18 @@ public class ProductOrderRepoTest {
 		assertTrue(result.stream()
 				.map(ProductOrder::getCreationDateTime)
 				.allMatch(ldt -> ldt.isBefore(param)));		
+	}
+	
+	@Test
+	public void test_findByCustomerId_will_return_ProductOrders_matching_AppUser() {
+		int expectedSize = 1;
+		
+		List<ProductOrder> result = testRepo.findByCustomerId(user1Id);
+		
+		assertEquals(expectedSize, result.size());
+		
+		assertTrue(result.stream()
+				.allMatch(order -> order.getCustomer().getId().equals(user1Id)));
+		
 	}
 }

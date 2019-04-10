@@ -10,5 +10,6 @@ import se.lexicon.spring_data_workshop.entity.ProductOrder;
 public interface ProductOrderRepo extends CrudRepository<ProductOrder, Integer>{
 	
 	List<ProductOrder> findByCreationDateTimeBefore(LocalDateTime someDateTime);
+	List<ProductOrder> findByCustomerId(String appUserId);
 
 }

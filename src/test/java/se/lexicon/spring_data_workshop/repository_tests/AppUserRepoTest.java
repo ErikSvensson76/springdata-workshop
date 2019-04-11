@@ -43,5 +43,15 @@ public class AppUserRepoTest {
 		
 		assertEquals(emailParam, result.get().getEmail());
 	}
+	
+	@Test
+	public void test_findEmail_is_present() {
+		String param = "test@test.com";
+		
+		Optional<String> result  = testRepo.findEmail(param);
+		
+		assertTrue(result.isPresent());
+		assertEquals(param, result.get());		
+	}
 
 }

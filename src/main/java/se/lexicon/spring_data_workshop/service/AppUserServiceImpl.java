@@ -67,5 +67,10 @@ public class AppUserServiceImpl implements AppUserService{
 		}
 		
 		return productOrderRepo.findByCustomerId(appUserId);		
+	}
+
+	@Override
+	public boolean emailIsUnique(String email) {
+		return appUserRepo.findEmail(email).isPresent();
 	}	
 }

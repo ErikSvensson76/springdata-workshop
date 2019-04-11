@@ -45,5 +45,7 @@ public interface AppUserService {
 	 * @throws EntityNotFoundException when AppUser can't be found
 	 */
 	AppUser findById(String id) throws IllegalArgumentException, EntityNotFoundException;
+	
+	boolean emailIsUnique(String email);
 
 }

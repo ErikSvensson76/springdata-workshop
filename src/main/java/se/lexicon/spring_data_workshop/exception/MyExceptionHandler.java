@@ -31,7 +31,4 @@ public class MyExceptionHandler extends ResponseEntityExceptionHandler {
 		errors.put("code", HttpStatus.BAD_REQUEST.value());
 		return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
 	}
-	
-	
-
 }

@@ -4,8 +4,13 @@ import java.util.List;
 
 import se.lexicon.spring_data_workshop.entity.Product;
 import se.lexicon.spring_data_workshop.exception.EntityNotFoundException;
+import se.lexicon.spring_data_workshop.form.ProductForm;
 
 public interface ProductService {
+	
+	static Product convertFromForm(ProductForm form) {
+		return new Product(form.getName(), form.getPrice());
+	}
 
 	Product findById(int id);
 

@@ -3,6 +3,7 @@ package se.lexicon.spring_data_workshop.service;
 import java.util.List;
 
 import se.lexicon.spring_data_workshop.entity.Product;
+import se.lexicon.spring_data_workshop.exception.EntityNotFoundException;
 
 public interface ProductService {
 
@@ -16,6 +17,6 @@ public interface ProductService {
 
 	Product save(Product product);
 
-	Product update(int productId, Product updated) throws IllegalArgumentException;
+	Product update(int productId, Product updated) throws EntityNotFoundException;
 
 }

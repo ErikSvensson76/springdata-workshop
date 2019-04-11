@@ -39,7 +39,7 @@ public class ProductController {
 	@PostMapping("/product")
 	public ResponseEntity<Product> create(@RequestBody Product newProduct){
 		if(newProduct == null) {
-			return ResponseEntity.badRequest().build();
+			throw new IllegalArgumentException("@RequestBody Product newProduct was " + newProduct);
 		}
 		
 		Product saved = service.save(newProduct);
@@ -50,22 +50,15 @@ public class ProductController {
 	@PutMapping("/product/{id}")
 	public ResponseEntity<Product> update(@PathVariable int id, @RequestBody Product updated){
 		if(updated == null) {
-			return ResponseEntity.badRequest().build();
+			throw new IllegalArgumentException("@RequestBody Product updated was " + updated);
 		}
 		
-		try {
-			return ResponseEntity.ok(service.update(id, updated));
-		}catch(IllegalArgumentException e) {
-			return ResponseEntity.notFound().build();
-		}		
+		return ResponseEntity.ok(service.update(id, updated));
+				
 	}
 	
 	@GetMapping("/product/{id}")
 	public ResponseEntity<Product> getProduct(@PathVariable int id){		
-		try {
-			return ResponseEntity.ok(service.findById(id));
-		}catch(IllegalArgumentException e) {
-			return ResponseEntity.notFound().build();
-		}		
+		return ResponseEntity.ok(service.findById(id));		
 	}	
 }

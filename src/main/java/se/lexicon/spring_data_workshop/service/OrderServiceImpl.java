@@ -43,13 +43,13 @@ public class OrderServiceImpl implements OrderService {
 		return new OrderItem(quantity, theProduct);
 	}
 	
-	public ProductOrder createOrder() {
-		ProductOrder newOrder = new ProductOrder(LocalDateTime.now());
+	public ProductOrder createOrder(LocalDateTime timeStamp) {
+		ProductOrder newOrder = new ProductOrder(timeStamp);
 		return orderRepo.save(newOrder);
 	}
 	
-	public ProductOrder createOrder(List<OrderItem> orderContent) {
-		ProductOrder newOrder = new ProductOrder(LocalDateTime.now());
+	public ProductOrder createOrder(LocalDateTime timeStamp, List<OrderItem> orderContent) {
+		ProductOrder newOrder = new ProductOrder(timeStamp);
 		
 		for(OrderItem item : orderContent) {
 			newOrder.addOrderItem(item);

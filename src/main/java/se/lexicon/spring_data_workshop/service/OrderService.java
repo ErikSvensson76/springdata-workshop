@@ -16,9 +16,9 @@ public interface OrderService {
 
 	OrderItem createOrderItem(int productId, int quantity);
 
-	ProductOrder createOrder();
+	ProductOrder createOrder(LocalDateTime timeStamp);
 
-	ProductOrder createOrder(List<OrderItem> orderContent);
+	ProductOrder createOrder(LocalDateTime timeStamp, List<OrderItem> orderContent);
 
 	ProductOrder save(ProductOrder order);
 

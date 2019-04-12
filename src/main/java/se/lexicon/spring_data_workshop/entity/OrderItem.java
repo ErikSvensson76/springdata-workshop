@@ -9,12 +9,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class OrderItem implements Comparable<OrderItem>{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private int id;	
 	private int quantity;
 	
 	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH},
@@ -49,6 +51,7 @@ public class OrderItem implements Comparable<OrderItem>{
 		this.product = product;
 	}
 
+	@JsonBackReference
 	public ProductOrder getOrder() {
 		return theOrder;
 	}

@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import se.lexicon.spring_data_workshop.entity.Product;
-import se.lexicon.spring_data_workshop.form.ProductForm;
+import se.lexicon.spring_data_workshop.forms_and_views.ProductForm;
 import se.lexicon.spring_data_workshop.service.ProductService;
 
 @RestController

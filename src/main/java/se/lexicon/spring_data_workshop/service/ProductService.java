@@ -4,7 +4,7 @@ import java.util.List;
 
 import se.lexicon.spring_data_workshop.entity.Product;
 import se.lexicon.spring_data_workshop.exception.EntityNotFoundException;
-import se.lexicon.spring_data_workshop.form.ProductForm;
+import se.lexicon.spring_data_workshop.forms_and_views.ProductForm;
 
 public interface ProductService {
 	

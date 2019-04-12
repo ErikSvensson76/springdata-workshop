@@ -20,9 +20,13 @@ public class AppUser {
 	private String email;
 	
 	public AppUser(String firstName, String lastName, String email) {
+		this(firstName, lastName);		
+		this.email = email;
+	}
+	
+	public AppUser(String firstName, String lastName) {
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.email = email;
 	}
 	
 	protected AppUser() {}

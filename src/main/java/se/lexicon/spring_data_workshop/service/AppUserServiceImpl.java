@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import se.lexicon.spring_data_workshop.entity.AppUser;
 import se.lexicon.spring_data_workshop.entity.ProductOrder;
 import se.lexicon.spring_data_workshop.exception.EntityNotFoundException;
+import se.lexicon.spring_data_workshop.forms_and_views.AppUserUpdateForm;
 import se.lexicon.spring_data_workshop.repository.AppUserRepo;
 import se.lexicon.spring_data_workshop.repository.ProductOrderRepo;
 
@@ -52,9 +53,8 @@ public class AppUserServiceImpl implements AppUserService{
 	}
 	
 	@Override
-	public AppUser update(String appUserId, AppUser updated) throws IllegalArgumentException, EntityNotFoundException{
-		AppUser original = findById(appUserId);
-		original.setEmail(updated.getEmail());
+	public AppUser update(String appUserId, AppUserUpdateForm updated) throws IllegalArgumentException, EntityNotFoundException{
+		AppUser original = findById(appUserId);		
 		original.setFirstName(updated.getFirstName());
 		original.setLastName(updated.getLastName());
 		return appUserRepo.save(original);
@@ -70,7 +70,12 @@ public class AppUserServiceImpl implements AppUserService{
 	}
 
 	@Override
-	public boolean emailIsUnique(String email) {
+	public boolean emailExists(String email) {
 		return appUserRepo.findEmail(email).isPresent();
 	}	
+	
+	@Override
+	public AppUser save(AppUser appUser) {
+		return appUserRepo.save(appUser);
+	}
 }

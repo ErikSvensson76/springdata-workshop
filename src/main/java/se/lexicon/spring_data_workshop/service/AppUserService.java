@@ -5,6 +5,7 @@ import java.util.List;
 import se.lexicon.spring_data_workshop.entity.AppUser;
 import se.lexicon.spring_data_workshop.entity.ProductOrder;
 import se.lexicon.spring_data_workshop.exception.EntityNotFoundException;
+import se.lexicon.spring_data_workshop.forms_and_views.AppUserUpdateForm;
 
 public interface AppUserService {
 
@@ -24,7 +25,7 @@ public interface AppUserService {
 	 * @throws IllegalArgumentException when appUserId is null
 	 * @throws EntityNotFoundException when AppUser can't be found with appUserId
 	 */
-	AppUser update(String appUserId, AppUser updated) throws IllegalArgumentException, EntityNotFoundException;
+	AppUser update(String appUserId, AppUserUpdateForm updated) throws IllegalArgumentException, EntityNotFoundException;
 
 	/**
 	 * 
@@ -46,6 +47,10 @@ public interface AppUserService {
 	 */
 	AppUser findById(String id) throws IllegalArgumentException, EntityNotFoundException;
 	
-	boolean emailIsUnique(String email);
+	boolean emailExists(String email);
+
+	AppUser save(AppUser appUser);
+
+
 
 }

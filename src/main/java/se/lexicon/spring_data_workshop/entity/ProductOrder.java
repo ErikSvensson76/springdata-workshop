@@ -14,6 +14,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class ProductOrder {
 	
@@ -26,7 +29,7 @@ public class ProductOrder {
 			fetch = FetchType.EAGER, 
 			mappedBy = "theOrder", 
 			orphanRemoval = true
-		)
+		)	
 	private Set<OrderItem> content = new TreeSet<>();
 	private final LocalDateTime creationDateTime;
 	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH},
@@ -42,6 +45,7 @@ public class ProductOrder {
 		creationDateTime = LocalDateTime.now();
 	}
 
+	@JsonManagedReference
 	public Set<OrderItem> getContent() {
 		return content;
 	}
@@ -58,6 +62,7 @@ public class ProductOrder {
 		return creationDateTime;
 	}	
 
+	@JsonIgnore
 	public AppUser getCustomer() {
 		return customer;
 	}

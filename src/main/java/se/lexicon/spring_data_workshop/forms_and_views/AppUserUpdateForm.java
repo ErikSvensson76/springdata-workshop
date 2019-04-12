@@ -6,9 +6,11 @@ import javax.validation.constraints.Size;
 public class AppUserUpdateForm {
 	
 	private String id;
+	
 	@NotBlank(message = "This field is required")
 	@Size(min = 2, message = "Need to have at least 2 characters")
 	private String firstName;
+	
 	@NotBlank(message = "This field is required")
 	@Size(min = 2, message = "Need to have at least 2 characters")
 	private String lastName;

@@ -8,6 +8,13 @@ import org.springframework.stereotype.Component;
 
 import se.lexicon.spring_data_workshop.service.AppUserService;
 
+
+/**
+ * 
+ * Implements the ConstraintValidator<constraint, type>
+ * 
+ *
+ */
 @Component
 public class UniqueEmailValidator implements ConstraintValidator<UniqueEmail, String>{
 

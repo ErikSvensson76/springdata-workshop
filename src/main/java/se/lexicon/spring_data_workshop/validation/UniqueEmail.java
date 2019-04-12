@@ -8,10 +8,17 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-@Constraint(validatedBy = UniqueEmailValidator.class)
+
+/**
+ * 
+ * Definition of the customer annotation @UniqueEmail
+ *
+ */
+@Constraint(validatedBy = UniqueEmailValidator.class) //Class that does the actual validation implementation
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD})
 public @interface UniqueEmail {
+	
 	 String message() default "There is already a user with this email";
 	 
 	 public Class<?>[] groups() default {};

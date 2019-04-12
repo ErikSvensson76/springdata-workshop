@@ -91,9 +91,12 @@ public class AppUserController {
 	@PatchMapping("/user/{id}")
 	public ResponseEntity<?> updateEmail(@PathVariable String id, @RequestBody String email ){
 		
+		//validEmailPattern checks correct syntax of the email
 		boolean regexValid = ValidateEmail.validEmailPattern(email);
+		//Checking if the email already exist in the database
 		boolean emailExists = userService.emailExists(email);
-				
+		
+		//Update only if syntax is correct and the email didn't exist in the database
 		if(regexValid && !emailExists) {
 			AppUser toUpdate = userService.findById(id);
 			toUpdate.setEmail(email);
@@ -108,6 +111,13 @@ public class AppUserController {
 		}		
 	}
 	
+	/*
+	 * Exception handler for the validation of both AppUserForm and AppUserUpdateForm
+	 * It handles the MethodArumentNotValidException that gets thrown when it finds fields
+	 * in the Form object that breach the contract(s) that the validation annotations inside the 
+	 * Form classes define.
+	 * 
+	 */
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public Map<String, String> productValidationException(MethodArgumentNotValidException e){

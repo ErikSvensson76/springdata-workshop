@@ -11,14 +11,17 @@ import se.lexicon.spring_data_workshop.validation.UniqueEmail;
 public class AppUserForm {	
 	
 	private String id;
+	
 	@NotBlank(message = "This field is required")
 	@Size(min = 2, message = "Need to have at least 2 characters")
 	private String firstName;
+	
 	@NotBlank(message = "This field is required")
 	@Size(min = 2, message = "Need to have at least 2 characters")
 	private String lastName;
+	
 	@NotBlank(message = "This field is required")
-	@UniqueEmail
+	@UniqueEmail //Custom annotation i created that checks if email is already in the database 
 	@Email(regexp = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", flags = Pattern.Flag.CASE_INSENSITIVE)
 	private String email;
 	

@@ -76,6 +76,10 @@ public class AppUserServiceImpl implements AppUserService{
 	
 	@Override
 	public AppUser save(AppUser appUser) {
+		
+		
 		return appUserRepo.save(appUser);
 	}
+	
+	
 }

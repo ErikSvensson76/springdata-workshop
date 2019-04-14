@@ -1,5 +1,14 @@
 package se.lexicon.spring_data_workshop.service_tests;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.when;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,15 +27,6 @@ import se.lexicon.spring_data_workshop.repository.AppUserRepo;
 import se.lexicon.spring_data_workshop.repository.ProductOrderRepo;
 import se.lexicon.spring_data_workshop.service.AppUserService;
 import se.lexicon.spring_data_workshop.service.AppUserServiceImpl;
-
-import static org.mockito.Mockito.*;
-import static org.junit.Assert.*;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.TreeSet;
 
 @RunWith(SpringRunner.class)
 public class AppUserServiceTest {

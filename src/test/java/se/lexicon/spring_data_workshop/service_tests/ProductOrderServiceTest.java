@@ -19,6 +19,8 @@ import se.lexicon.spring_data_workshop.entity.OrderItem;
 import se.lexicon.spring_data_workshop.entity.Product;
 import se.lexicon.spring_data_workshop.entity.ProductOrder;
 import se.lexicon.spring_data_workshop.exception.EntityNotFoundException;
+import se.lexicon.spring_data_workshop.forms_and_views.OrderItemForm;
+import se.lexicon.spring_data_workshop.repository.AppUserRepo;
 import se.lexicon.spring_data_workshop.repository.ProductOrderRepo;
 import se.lexicon.spring_data_workshop.service.OrderService;
 import se.lexicon.spring_data_workshop.service.OrderServiceImpl;
@@ -32,8 +34,8 @@ public class ProductOrderServiceTest {
 	@TestConfiguration
 	static class OrderServiceTestConfig{
 		@Bean
-		public OrderServiceImpl orderService(ProductOrderRepo orderRepo, ProductService productService) {
-			return new OrderServiceImpl(orderRepo, productService);
+		public OrderServiceImpl orderService(ProductOrderRepo orderRepo, ProductService productService, AppUserRepo appUserRepo) {
+			return new OrderServiceImpl(orderRepo, productService, appUserRepo);
 		}
 	}
 	
@@ -43,6 +45,8 @@ public class ProductOrderServiceTest {
 	private ProductService productService;	
 	@MockBean
 	private ProductOrderRepo orderRepo;
+	@MockBean
+	private AppUserRepo appUserRepo;
 	
 	private static final LocalDateTime CREATION_DATE_TIME = LocalDateTime.of(2019, 04, 12, 20, 06);
 	
@@ -91,22 +95,33 @@ public class ProductOrderServiceTest {
 		assertEquals(expected, testService.createOrder(param));
 	}
 	
+
 	@Test
-	public void test_createOrder_with_timeStamp_and_orderContent() {
-		LocalDateTime timeStamp = LocalDateTime.of(2019, 04, 14, 9, 00);
-		List<OrderItem> orderContent = Arrays.asList(
-				new OrderItem(3, new Product("content1", 20)),
-				new OrderItem(1, new Product("content2", 990.90))				
-				);
+	public void test_createOrder_full() {
+		AppUser customer = new AppUser("Nisse", "Nillson", "nisselito@gmail.com");
+		Product orderItemProduct = new Product("Spam", 10);
+		OrderItem item = new OrderItem(10, orderItemProduct);
+		ProductOrder order = new ProductOrder(LocalDateTime.now());
+		order.setCustomer(customer);
+		order.addOrderItem(item);
 		
-		ProductOrder expected = new ProductOrder(timeStamp);
-				
-		when(orderRepo.save(any(ProductOrder.class))).thenReturn(expected);
+		OrderItemForm inList = new OrderItemForm();
+		inList.setProductId(0);
+		inList.setQuantity(10);
+		String appUserId = "test";
+		List<OrderItemForm> formParam = Arrays.asList(inList);		
 		
-		ProductOrder result = testService.createOrder(timeStamp, orderContent);
+		when(appUserRepo.findById(anyString())).thenReturn(Optional.of(customer));
+		when(productService.findById(anyInt())).thenReturn(orderItemProduct);
+		when(orderRepo.save(any(ProductOrder.class))).thenReturn(order);
 		
-		assertEquals(expected, result);		
+		ProductOrder result = testService.createOrder(formParam, appUserId);
+		
+		assertEquals(order, result);
+		assertEquals(order.getContent(), result.getContent());
+		assertEquals(order.getCustomer(), result.getCustomer());
 	}
+	
 	
 	@Test
 	public void test_createOrderItem() {

@@ -5,9 +5,12 @@ import java.util.List;
 
 import se.lexicon.spring_data_workshop.entity.OrderItem;
 import se.lexicon.spring_data_workshop.entity.ProductOrder;
+import se.lexicon.spring_data_workshop.forms_and_views.OrderItemForm;
+import se.lexicon.spring_data_workshop.forms_and_views.ProductOrderForm;
 
 public interface OrderService {
-
+	
+	
 	ProductOrder findOrderById(int id);
 
 	List<ProductOrder> findAll();
@@ -18,8 +21,10 @@ public interface OrderService {
 
 	ProductOrder createOrder(LocalDateTime timeStamp);
 
-	ProductOrder createOrder(LocalDateTime timeStamp, List<OrderItem> orderContent);
+	ProductOrder createOrder(List<OrderItemForm> orderContent, String appUserId);
 
 	ProductOrder save(ProductOrder order);
+
+	OrderItem createFromForm(OrderItemForm form);
 
 }
